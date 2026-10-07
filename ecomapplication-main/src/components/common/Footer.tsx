@@ -16,7 +16,6 @@ import { useProducts } from '@/hooks/useProducts';
 import { slugify } from '../../utils/helpers';
 
 const contactChannels = [
-  { label: 'Call Sales', value: '+91 9059585039', href: 'tel:+919059585039', Icon: PhoneCall },
   { label: 'Call Sales', value: '+91 9701314138', href: 'tel:+919701314138', Icon: PhoneCall },
   // { label: 'WhatsApp',     value: '+91 9701314138',       href: 'https://wa.me/919701314138',   Icon: MessageCircle },
   { label: 'Email Desk', value: 'sales@nxsysdigital.com', href: 'mailto:sales@nxsysdigital.com', Icon: Mail },

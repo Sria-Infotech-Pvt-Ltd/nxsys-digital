@@ -448,10 +448,10 @@ function SEOAboutSection() {
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
               <a
-                href="tel:+9190595850398"
+                href="tel:+919701314138"
                 className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors whitespace-nowrap"
               >
-                Call +91 90595 85039
+                Call +91 97013 14138
               </a>
               <Link
                 to="/contact"

@@ -98,10 +98,10 @@ function Contact() {
               <div className="min-w-0 space-y-1.5">
                 <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Phone</h3>
                 <a
-                  href="tel:+919059585039"
+                  href="tel:+919701314138"
                   className="block text-2xl font-black text-slate-900 transition-colors hover:text-primary sm:text-3xl"
                 >
-                  +91 90595 85039
+                  +91 97013 14138
                 </a>
                 <p className="text-[12px] font-medium text-slate-400">Available for calls and WhatsApp</p>
               </div>
