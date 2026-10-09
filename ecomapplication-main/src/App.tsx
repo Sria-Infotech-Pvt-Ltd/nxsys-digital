@@ -6,6 +6,7 @@ import ScrollToTop from '@/components/common/ScrollToTop';
 import ToastNotification from '@/components/common/ToastNotification';
 import PageLoader from '@/components/common/feedback/PageLoader';
 import { useCanonicalUrl } from '@/hooks/useCanonicalUrl';
+import { useMetaPixelPageView } from '@/hooks/useMetaPixelPageView';
 const MainLayout = lazy(() => import('@/layouts/MainLayout'));
 const AdminLayout = lazy(() => import('@/layouts/AdminLayout'));
 
@@ -86,6 +87,7 @@ function AdminGuard() {
 
 function App() {
   useCanonicalUrl();
+  useMetaPixelPageView();
 
   return (
     <>

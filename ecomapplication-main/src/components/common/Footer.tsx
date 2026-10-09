@@ -228,11 +228,10 @@ function Footer() {
       <div className="container-shell">
         <div className="flex flex-col gap-3 py-5 text-[12px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            &copy; {new Date().getFullYear()} Sria Distribution. All rights reserved.
+            &copy; {new Date().getFullYear()} NxSys Digital Distribution. All rights reserved.
           </p>
           <p className="hidden text-center sm:block">
-            Powered by{' '}
-            <a href="https://www.sriainfotech.com" target='_blank' className="font-semibold text-primary">Sria Infotech Pvt Ltd</a>
+            A <a href="https://www.sriainfotech.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Sria Group</a> of Company
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link to="/products" className="transition-colors hover:text-primary">Catalog</Link>

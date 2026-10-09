@@ -114,7 +114,9 @@ function AboutUs() {
             IT Hardware Distributor in India
           </h1>
           <p className="text-base leading-8 text-slate-600 mb-4">
-            NxSys Digital is an IT hardware distributor in India, helping businesses, institutions, resellers and
+            NxSys Digital is a sister concern of{' '}
+            <a href="https://www.sriainfotech.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Sria Group</a>
+            . NxSys Digital is an IT hardware distributor in India, helping businesses, institutions, resellers and
             system integrators source reliable IT products for their requirements. We supply laptops, desktops,
             monitors, projectors, printers, networking equipment, accessories and other IT hardware.
           </p>

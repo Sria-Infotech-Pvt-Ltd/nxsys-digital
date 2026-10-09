@@ -149,7 +149,9 @@ function Home() {
       <section className="bg-white py-14 sm:py-16 border-b border-slate-100">
         <div className="container-shell max-w-3xl mx-auto text-center">
           <p className="text-base leading-8 text-slate-600 mb-4">
-            NxSys Digital is a B2B IT hardware distributor in India, helping businesses and institutions source
+            NxSys Digital is a sister concern of{' '}
+            <a href="https://www.sriainfotech.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Sria Group</a>
+            . NxSys Digital is a B2B IT hardware distributor in India, helping businesses and institutions source
             laptops, desktops, monitors, projectors, printers, networking equipment and other IT products.
           </p>
           <p className="text-base leading-8 text-slate-600 mb-4">
