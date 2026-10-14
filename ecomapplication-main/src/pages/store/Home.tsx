@@ -5,6 +5,7 @@ import { getBrandName, getCategoryName } from '@/services';
 import { useProducts } from '@/hooks/useProducts';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import HeroBanner from '@/components/home/HeroBanner';
+import PromoOffers from '@/components/home/PromoOffers';
 import TopSellersGrid from '@/components/home/TopSellersGrid';
 import CategoryCarousel, { type CarouselVariant } from '@/components/home/CategoryCarousel';
 import CategoryBrandStrip from '@/components/home/CategoryBrandStrip';
@@ -144,6 +145,8 @@ function Home() {
 
   return (
     <main className="bg-greyLight">
+      <PromoOffers />
+
       <HeroBanner slides={heroSlides} pageHeading="B2B IT Hardware Distributor in India" />
 
       <section className="bg-white py-14 sm:py-16 border-b border-slate-100">

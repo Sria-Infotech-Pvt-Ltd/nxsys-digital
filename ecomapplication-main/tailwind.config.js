@@ -21,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Archivo', 'sans-serif'],
       },
       letterSpacing: {
         'lumio-ui': '1px', // Less flashy

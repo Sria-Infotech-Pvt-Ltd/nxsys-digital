@@ -341,6 +341,12 @@ function CategoryNav() {
                   onOpen={() => openDesktopMenu(item.name)}
                 />
               ))}
+              <NavLink
+                to="/how-to-buy"
+                className="flex h-full shrink-0 items-center px-3 md:px-6 text-[12px] md:text-[14px] font-medium uppercase tracking-[0.12em] text-white whitespace-nowrap transition-all hover:bg-black/10"
+              >
+                How to Buy
+              </NavLink>
             </div>
           </div>
         </div>
@@ -389,6 +395,13 @@ function CategoryNav() {
 
             {/* Sidebar body */}
             <div className="flex-1 overflow-y-auto p-4 space-y-2">
+              <NavLink
+                to="/how-to-buy"
+                onClick={closeSidebar}
+                className={({ isActive }) => `block rounded-2xl border border-slate-100 px-4 py-3.5 text-left text-[13px] font-bold uppercase tracking-wider transition-colors ${isActive ? 'bg-primary/5 text-primary' : 'bg-white text-textMain hover:bg-slate-50'}`}
+              >
+                How to Buy
+              </NavLink>
               {menuItems.map((item) => {
                 const isOpen = expandedMobileGroup === item.name;
                 const sections = item.sections;

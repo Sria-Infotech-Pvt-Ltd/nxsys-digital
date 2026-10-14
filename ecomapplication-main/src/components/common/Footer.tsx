@@ -236,6 +236,7 @@ function Footer() {
           <div className="flex flex-wrap items-center gap-4">
             <Link to="/products" className="transition-colors hover:text-primary">Catalog</Link>
             <Link to="/about" className="transition-colors hover:text-primary">About Us</Link>
+            <Link to="/how-to-buy" className="transition-colors hover:text-primary">How to Buy</Link>
             <Link to="/contact" className="transition-colors hover:text-primary">Contact</Link>
             <Link to="/terms-conditions" className="transition-colors hover:text-primary">Terms</Link>
             <Link to="/privacy-policy" className="transition-colors hover:text-primary">Privacy</Link>
