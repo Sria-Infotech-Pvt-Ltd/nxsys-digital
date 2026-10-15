@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Package, FolderOpen, ClipboardList, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Package, FolderOpen, ClipboardList, ArrowRight, ShieldCheck } from 'lucide-react';
+import logoDark from '../../assets/NxSys Digital Logo with Pixel Burst.png';
+import logoLight from '../../assets/NxSys Digital Logo with Pixel Dispersion.png';
 import { authService } from '@/services';
 import { getNormalizedApiError } from '@/services';
 import { showToast } from '@/utils/helpers';
@@ -85,13 +87,8 @@ function AdminLoginPage() {
         {/* Top — brand + headline */}
         <div className="relative space-y-7">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-[0_4px_16px_rgba(48,149,248,0.3)]">
-              <LayoutDashboard size={19} className="text-textMain" />
-            </div>
-            <div>
-              <p className="text-[14px] font-black uppercase tracking-[0.2em] text-white">Sria Distribution</p>
-              <p className="text-[11px] text-slate-500">Admin Portal</p>
-            </div>
+            <img src={logoDark} alt="NxSys Digital" className="h-11 w-auto object-contain" />
+            <p className="text-[11px] text-slate-500">Admin Portal</p>
           </div>
 
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5">
@@ -136,11 +133,8 @@ function AdminLoginPage() {
         <div className="mx-auto w-full max-w-[380px]">
 
           {/* Mobile brand */}
-          <div className="mb-7 flex items-center gap-3 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary">
-              <LayoutDashboard size={17} className="text-textMain" />
-            </div>
-            <p className="text-[13px] font-black uppercase tracking-wider text-slate-900">Sria Distribution</p>
+          <div className="mb-7 flex items-center lg:hidden">
+            <img src={logoLight} alt="NxSys Digital" className="h-10 w-auto object-contain" />
           </div>
 
           {/* Accent + heading */}

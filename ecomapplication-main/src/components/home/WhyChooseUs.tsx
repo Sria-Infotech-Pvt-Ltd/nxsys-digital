@@ -33,13 +33,13 @@ const FEATURES = [
 
 function WhyChooseUs() {
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-slate-50 py-20 sm:py-24">
       <div className="container-shell">
 
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center mb-14">
           <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary">
-            Why Sria Distribution
+            Why NxSys Digital
           </p>
           <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl lg:text-[2.75rem]">
             The smarter way to source enterprise hardware

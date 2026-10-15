@@ -1,4 +1,6 @@
 import { ShoppingBag, Tag, MessageSquare, Headphones } from 'lucide-react';
+import logoDark from '../../assets/NxSys Digital Logo with Pixel Burst.png';
+import logoLight from '../../assets/NxSys Digital Logo with Pixel Dispersion.png';
 
 const PERKS = [
   { Icon: ShoppingBag,   label: 'Wide Product Range',     desc: 'Thousands of electronics and accessories in one place.' },
@@ -40,11 +42,8 @@ const AuthLayout = ({ children, title, subtitle, badge, imageText, imageSubtitle
         <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
         {/* Brand */}
-        <div className="relative flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-[0_4px_16px_rgba(48,149,248,0.3)]">
-            <ShoppingBag size={19} className="text-textMain" />
-          </div>
-          <span className="text-[14px] font-black uppercase tracking-[0.2em] text-white">Sria Distribution</span>
+        <div className="relative flex items-center">
+          <img src={logoDark} alt="NxSys Digital" className="h-12 w-auto object-contain xl:h-14" />
         </div>
 
         {/* Hero text */}
@@ -84,11 +83,8 @@ const AuthLayout = ({ children, title, subtitle, badge, imageText, imageSubtitle
         <div className="mx-auto w-full max-w-[360px]">
 
           {/* Mobile brand */}
-          <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary">
-              <ShoppingBag size={17} className="text-textMain" />
-            </div>
-            <span className="text-[14px] font-black uppercase tracking-[0.2em] text-slate-900">Sria Distribution</span>
+          <div className="mb-8 flex items-center lg:hidden">
+            <img src={logoLight} alt="NxSys Digital" className="h-11 w-auto object-contain" />
           </div>
 
           {/* Heading */}

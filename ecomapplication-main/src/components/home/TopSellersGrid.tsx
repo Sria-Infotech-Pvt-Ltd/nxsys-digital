@@ -37,7 +37,7 @@ function TopSellersGrid({
 
   if (loading) {
     return (
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-slate-50 py-12 sm:py-16 md:py-20">
         <div className="container-shell space-y-8">
           <SectionHeader />
           <div className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-24 text-center text-sm font-bold uppercase tracking-widest text-slate-400">
@@ -50,7 +50,7 @@ function TopSellersGrid({
 
   if (error || !products.length) {
     return (
-      <section className="bg-white py-12 sm:py-16 md:py-20">
+      <section className="bg-slate-50 py-12 sm:py-16 md:py-20">
         <div className="container-shell space-y-8">
           <SectionHeader />
           <div className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-24 text-center text-sm font-bold uppercase tracking-widest text-slate-400">
@@ -62,7 +62,7 @@ function TopSellersGrid({
   }
 
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-20">
+    <section className="bg-slate-50 py-12 sm:py-16 md:py-20">
       <div className="container-shell space-y-8 sm:space-y-10">
         <SectionHeader />
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">

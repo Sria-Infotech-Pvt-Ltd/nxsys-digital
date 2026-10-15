@@ -101,14 +101,23 @@ function Home() {
       if (!grouped[catName]) grouped[catName] = [];
       grouped[catName].push(buildProductCard(product, categories));
     });
-    return Object.entries(grouped)
+    const entries = Object.entries(grouped)
       .filter(([, items]) => items.length >= 1)
-      .sort(([, a], [, b]) => b.length - a.length)
-      .map(([catName, items], idx) => ({
+      .sort(([, a], [, b]) => b.length - a.length);
+
+    return entries.map(([catName, items], idx) => {
+      let variant = CAROUSEL_VARIANTS[idx % CAROUSEL_VARIANTS.length];
+      // The section right after the last carousel (CategoryBrandStrip) is always dark,
+      // so avoid ending on the 'dark' variant to prevent two dark sections in a row.
+      if (idx === entries.length - 1 && variant === 'dark') {
+        variant = 'tinted';
+      }
+      return {
         category: catName,
         products: items.slice(0, 12),
-        variant: CAROUSEL_VARIANTS[idx % CAROUSEL_VARIANTS.length],
-      }));
+        variant,
+      };
+    });
   }, [products, categories]);
 
   const categoryBrandStrip = useMemo(() => {

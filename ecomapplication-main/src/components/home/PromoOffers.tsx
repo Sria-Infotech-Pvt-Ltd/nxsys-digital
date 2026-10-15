@@ -1,58 +1,75 @@
-import { Link } from 'react-router-dom';
+import { memo, useEffect, useState } from 'react';
+import thinkBookOffer from '../../assets/offers/Dussehra ThinkBook Business Power.png';
+import qvs1260Offer from '../../assets/offers/Dell Pro Slim QVS1260 Business Desktop.png';
 
-type PromoOffer = {
+type Offer = {
   id: string;
   image: string;
   alt: string;
-  href: string;
 };
 
-const MAIN_OFFER: PromoOffer = {
-  id: 'thinkbook-14-g8-ial',
-  image: '/Lenovo ThinkBook AI-Ready Business Banner.png',
-  alt: 'Lenovo ThinkBook 14 G8 IAL - AI-Ready Business Laptop',
-  href: '/product/388',
-};
+const OFFERS: Offer[] = [
+  {
+    id: 'thinkbook-14-g8-ial',
+    image: thinkBookOffer,
+    alt: 'Dussehra Special Offer - Lenovo ThinkBook 14 G8 IAL',
+  },
+  {
+    id: 'qvs1260-pro-slim',
+    image: qvs1260Offer,
+    alt: 'Dell Pro Slim QVS1260 Business Desktop',
+  },
+];
 
-const SIDE_OFFER: PromoOffer = {
-  id: 'qvs1260-pro-slim',
-  image: '/QVS1260 Slim Business Desktop Banner.png',
-  alt: 'Lenovo QVS1260 Pro Slim - Business Desktop',
-  href: '/product/389',
-};
+const AUTO_ADVANCE_MS = 5000;
 
 function PromoOffers() {
-  return (
-    <section className="bg-white py-4 sm:py-6">
-      <div className="container-shell">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <Link
-            to={MAIN_OFFER.href}
-            className="group block overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-shadow bg-slate-50"
-          >
-            <img
-              src={MAIN_OFFER.image}
-              alt={MAIN_OFFER.alt}
-              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              loading="eager"
-            />
-          </Link>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-          <Link
-            to={SIDE_OFFER.href}
-            className="group block overflow-hidden rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-shadow bg-slate-50"
+  useEffect(() => {
+    if (OFFERS.length < 2) return undefined;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % OFFERS.length);
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative w-full overflow-hidden bg-white">
+      <div className="relative w-full aspect-[3.5/1] min-h-[120px] sm:min-h-[190px]">
+        {OFFERS.map((offer, index) => (
+          <div
+            key={offer.id}
+            aria-hidden={index !== activeIndex}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: index === activeIndex ? 1 : 0 }}
           >
             <img
-              src={SIDE_OFFER.image}
-              alt={SIDE_OFFER.alt}
-              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-              loading="lazy"
+              src={offer.image}
+              alt={offer.alt}
+              className="h-full w-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
             />
-          </Link>
-        </div>
+          </div>
+        ))}
+
+        {OFFERS.length > 1 && (
+          <div className="absolute bottom-3 left-0 right-0 z-10 flex justify-center gap-2">
+            {OFFERS.map((offer, idx) => (
+              <button
+                key={offer.id}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className={`h-[4px] rounded-full transition-all duration-300 ${idx === activeIndex ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/60'
+                  }`}
+                aria-label={`View offer ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-export default PromoOffers;
+export default memo(PromoOffers);

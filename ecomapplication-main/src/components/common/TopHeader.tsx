@@ -1,7 +1,7 @@
 import { startTransition, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { Heart, Search, LogOut, User } from 'lucide-react';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logoDark from '../../assets/NxSys Digital Logo with Pixel Burst.png';
 import { useProducts } from '@/hooks/useProducts';
 import { isAdminUser } from '@/utils/access';
 import { getBrandName, resolveAssetUrl } from '@/services';
@@ -99,8 +99,7 @@ function TopHeader({ profile, handleLogout }) {
           <div className="flex items-center justify-between w-full lg:w-auto">
             <NavLink to="/" aria-label="Home" className="group flex shrink-0 items-center">
               <img
-                // src={logo}
-                src='/nxd.jpeg'
+                src={logoDark}
                 alt="Nx Sys Distribution Logo"
                 className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] lg:h-[60px]"
                 width="240"

@@ -9,8 +9,8 @@ interface AdminPageHeaderProps {
 
 function AdminPageHeader({ eyebrow, title, description, action }: AdminPageHeaderProps) {
   return (
-    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div className="min-w-0 max-w-3xl">
+    <div className="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:items-end lg:justify-between">
+      <div className="min-w-0 max-w-3xl flex-1">
         {eyebrow && (
           <div className="mb-3 flex items-center gap-2.5">
             <div className="h-[3px] w-5 rounded-full bg-primary" />
@@ -28,7 +28,7 @@ function AdminPageHeader({ eyebrow, title, description, action }: AdminPageHeade
           </p>
         )}
       </div>
-      {action && <div className="shrink-0 max-sm:w-full">{action}</div>}
+      {action && <div className="min-w-0 max-sm:w-full lg:shrink">{action}</div>}
     </div>
   );
 }

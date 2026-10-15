@@ -139,10 +139,10 @@ const Kpi = ({
       <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${bg[color]}`}>
         {icon}
       </div>
-      <div className="min-w-0">
-        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
-        <p className="mt-0.5 text-2xl font-black text-slate-900">{value}</p>
-        {sub && <p className="mt-0.5 text-[11px] font-medium text-slate-400">{sub}</p>}
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[10px] font-black uppercase tracking-widest text-slate-400">{label}</p>
+        <p className="mt-0.5 truncate text-2xl font-black text-slate-900">{value}</p>
+        {sub && <p className="mt-0.5 truncate text-[11px] font-medium text-slate-400">{sub}</p>}
       </div>
     </div>
   );
@@ -296,7 +296,7 @@ function AdminDashboardPage() {
       </div>
 
       {/* ── Top KPIs ── */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 2xl:grid-cols-6">
         <Kpi label="Products"   value={counts.total_products   || 0} sub={`${counts.total_categories || 0} categories`}  icon={<ShoppingBag size={18} />} color="slate"  />
         <Kpi label="Customers"  value={customers.total_users   || 0} sub={`${customers.new_users_today || 0} joined today`} icon={<Users size={18} />}      color="blue"   />
         <Kpi label="RFQs"       value={counts.total_requests   || 0} sub={`${counts.pending_requests  || 0} pending`}     icon={<TrendingUp size={18} />}  color="amber"  />
