@@ -6,6 +6,7 @@ import {
   ArrowRight, MapPin, Globe2, Mail, Phone, Plus, Minus,
 } from 'lucide-react';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
+import warehouseBarcodeImage from '../../assets/content/warehouse-barcode-scan.jpg';
 
 const INTRO_PARAGRAPHS = [
   'NxSys Digital is an IT hardware distributor in Hyderabad, supporting businesses with technology products and B2B procurement solutions. Based in the Kondapur business area, Hyderabad, Telangana, we help organisations source IT hardware for their daily operations, workplace infrastructure, and technology requirements.',
@@ -186,6 +187,23 @@ function AboutUs() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* Operations snapshot */}
+      <section className="bg-slate-50 py-16 sm:py-20 border-b border-slate-100">
+        <div className="container-shell max-w-4xl mx-auto">
+          <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+            <img
+              src={warehouseBarcodeImage}
+              alt="NxSys Digital team coordinating stock and dispatch for a B2B order"
+              className="h-full w-full object-cover max-h-[420px]"
+              loading="lazy"
+            />
+          </div>
+          <p className="mt-5 text-center text-[13px] text-slate-500">
+            Coordinating product availability, dispatch and documentation for every B2B order.
+          </p>
         </div>
       </section>
 

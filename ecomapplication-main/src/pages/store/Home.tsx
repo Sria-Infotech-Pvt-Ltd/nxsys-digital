@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import placeholder from '../../assets/placeholder.jpg';
+import warehouseTeamImage from '../../assets/content/warehouse-team-review.jpg';
+import salesQuoteImage from '../../assets/content/sales-quote-discussion.jpg';
 import { getBrandName, getCategoryName } from '@/services';
 import { useProducts } from '@/hooks/useProducts';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
@@ -192,6 +194,38 @@ function Home() {
         </div>
       </section>
 
+      <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-800">
+        <div className="container-shell grid gap-10 lg:grid-cols-2 items-center">
+          <div className="order-2 lg:order-1">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
+              Procurement, Backed by People
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-6 leading-tight">
+              A team that keeps your orders moving
+            </h2>
+            <p className="text-base leading-8 text-slate-400 mb-6">
+              Behind every quotation and purchase order is a team that tracks stock, checks pricing and coordinates
+              dispatch so your business gets the right hardware on time. From enquiry to delivery, our procurement
+              team stays involved at every step.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
+            >
+              Talk to Our Team
+            </Link>
+          </div>
+          <div className="order-1 lg:order-2 overflow-hidden rounded-2xl border border-white/10">
+            <img
+              src={warehouseTeamImage}
+              alt="NxSys Digital procurement team reviewing stock and orders"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
       <TopSellersGrid products={topSellers} loading={loading} error={error || undefined} />
 
       {categoryCarousels.map(({ category, products: catProducts, variant }) => (
@@ -205,6 +239,38 @@ function Home() {
 
       <CategoryBrandStrip data={categoryBrandStrip} />
       <WhyChooseUs />
+
+      <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-800">
+        <div className="container-shell grid gap-10 lg:grid-cols-2 items-center">
+          <div className="overflow-hidden rounded-2xl border border-white/10">
+            <img
+              src={salesQuoteImage}
+              alt="NxSys Digital sales team discussing pricing and availability with a customer"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
+              Quick, Clear Conversations
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-6 leading-tight">
+              Real conversations, real quotations
+            </h2>
+            <p className="text-base leading-8 text-slate-400 mb-6">
+              Share your requirement and our sales team will walk you through suitable products, pricing and
+              availability, so you can make a confident purchasing decision without back-and-forth delays.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
+            >
+              Request a Quote
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <SEOAboutSection />
     </main>
   );
