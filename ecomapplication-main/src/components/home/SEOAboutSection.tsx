@@ -9,13 +9,6 @@ import {
 
 /* ─── Data ─────────────────────────────────────────────── */
 
-const STATS = [
-  { value: '25+',   label: 'OEM Brands'       },
-  { value: '1000+', label: 'Active SKUs'       },
-  { value: '48hr',  label: 'Avg. Fulfillment'  },
-  { value: '100%',  label: 'Genuine Stock'     },
-];
-
 const ABOUT_BULLETS = [
   'Products sourced through authorised channels',
   '25+ OEM brands',
@@ -34,43 +27,37 @@ const CATEGORIES = [
     icon: Monitor,
     name: 'Monitors & Displays',
     short: 'Professional 4K, colour-accurate, and ultrawide panels',
-    description:
-      'Professional-grade monitors from BenQ, Dell UltraSharp, and HP Z-Display across Full HD to 4K UHD, IPS and VA panels, colour-critical wide-gamut displays, ultra-wide curved models for trading and multi-app workflows, and compact office monitors for high-density desk deployments. Hardware calibration and VESA mount compatibility available across most SKUs.',
+    description: 'From BenQ, Dell and HP — Full HD to 4K UHD, colour-critical and ultrawide panels for every workstation.',
   },
   {
     icon: Video,
     name: 'Projectors',
     short: 'Business, classroom, and large-venue laser projectors',
-    description:
-      'Short-throw and ultra-short-throw projectors from BenQ, Epson, and Acer for conference rooms, classrooms, and large-venue installations. Laser light source models with 20,000+ hour lamp life eliminate recurring replacement costs. Wireless screen mirroring, HDMI switching, and network management supported.',
+    description: 'Short-throw and laser projectors from BenQ, Epson and Acer for conference rooms, classrooms and venues.',
   },
   {
     icon: Laptop,
     name: 'Laptops & Computers',
     short: 'Commercial-grade devices from Dell, HP, Lenovo & Apple',
-    description:
-      'Commercial laptops and desktops built for enterprise deployment: thin-and-light ultrabooks, rugged field units, mobile workstations, SFF desktops, all-in-ones, and tower workstations with professional GPU options. Longer warranty terms, TPM chips, and MDM compatibility included. Custom RAM and storage configurations available on volume orders.',
+    description: 'Ultrabooks, workstations, SFF desktops and all-in-ones, with enterprise warranty and MDM compatibility.',
   },
   {
     icon: Network,
     name: 'Networking & Infrastructure',
     short: 'Switches, Wi-Fi 6 APs, routers and rack infrastructure',
-    description:
-      'Managed and unmanaged switches, Wi-Fi 6 and Wi-Fi 6E access points, UTM routers, structured cabling, and rack infrastructure from Cisco, TP-Link, D-Link, and Ubiquiti. Covers single-office LANs through multi-floor campus deployments with centralised wireless management, VLAN segmentation, and PoE distribution.',
+    description: 'Managed switches, Wi-Fi 6 access points and structured cabling for single offices through campus deployments.',
   },
   {
     icon: Printer,
     name: 'Printers & Imaging',
     short: 'Laser, inkjet, and large-format for every print volume',
-    description:
-      'Monochrome and colour laser printers, multifunction devices, inkjet office units, and large-format plotters from HP, Canon, Epson, and Brother. OEM toner and consumables available alongside hardware. Extended service contracts with next-business-day on-site response for high-uptime environments.',
+    description: 'Laser, inkjet and large-format printers from HP, Canon and Epson, with OEM consumables and service contracts.',
   },
   {
     icon: Cpu,
     name: 'Accessories & Peripherals',
     short: 'Keyboards, docks, UPS, cameras and ergonomic accessories',
-    description:
-      'Keyboards, mice, docking stations, USB hubs, video conferencing cameras, KVM switches, UPS and power protection, and ergonomic desk accessories. Consistent SKU availability across replenishment cycles ensures compatibility when adding to existing deployments. Bulk accessory orders receive the same volume pricing as core hardware.',
+    description: 'Keyboards, docking stations, UPS and ergonomic accessories, priced the same as core hardware on bulk orders.',
   },
 ];
 
@@ -188,30 +175,25 @@ function SEOAboutSection() {
       ══════════════════════════════════════════ */}
       <section className="bg-white py-20 sm:py-24 border-b border-slate-100">
         <div className="container-shell">
-          <div className="grid gap-12 lg:grid-cols-[1fr_420px] lg:gap-20 items-start">
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
+              About NxSys Digital
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-6 leading-tight">
+              Your trusted IT hardware partner for business procurement
+            </h2>
+            <p className="text-base leading-relaxed text-slate-500">
+              Buying IT hardware for a business is not always as simple as choosing a product online — specifications,
+              availability, bulk pricing, warranty and delivery all need coordinating. NxSys Digital brings these
+              together through one B2B procurement channel, built specifically for RFQs, volume pricing and
+              after-sales support through a single named contact.
+            </p>
+          </div>
 
-            {/* Left — text */}
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
-                About NxSys Digital
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-6 leading-tight">
-                Your trusted IT hardware partner for business procurement
-              </h2>
-              <p className="text-base leading-8 text-slate-500 mb-6">
-                Buying IT hardware for a business is not always as simple as choosing a product online. You may
-                need to compare specifications, check availability, get bulk pricing, confirm warranty details and
-                coordinate delivery. For larger projects, managing all of this through different suppliers can take
-                even more time.
-              </p>
-              <p className="text-base leading-8 text-slate-500 mb-8">
-                NxSys Digital helps simplify this process. We bring different IT hardware categories together
-                through one B2B procurement channel. Our team can help with product selection, quotations, bulk
-                requirements, order coordination and after-sales support.
-              </p>
-
-              {/* Bullet checklist */}
-              <ul className="space-y-3 mb-10">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 items-start">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+              <h3 className="font-black text-slate-900 text-[15px] mb-5">What You Can Expect</h3>
+              <ul className="grid gap-3 sm:grid-cols-2">
                 {ABOUT_BULLETS.map((point) => (
                   <li key={point} className="flex items-start gap-3 text-[14px] text-slate-600">
                     <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-primary" strokeWidth={2.5} />
@@ -219,7 +201,15 @@ function SEOAboutSection() {
                   </li>
                 ))}
               </ul>
+            </div>
 
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8">
+              <h3 className="font-black text-slate-900 text-[15px] mb-3">Built for Scale</h3>
+              <p className="text-[14px] leading-7 text-slate-500 mb-6">
+                Registered partners gain real-time inventory visibility, priority fulfilment queues, and early
+                access to new product lines. Whether you're deploying 10 workstations or 1,000, our process scales
+                without compromising authenticity or service quality.
+              </p>
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/contact"
@@ -229,37 +219,10 @@ function SEOAboutSection() {
                 </Link>
                 <Link
                   to="/register"
-                  className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-2 border-2 border-slate-300 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors"
                 >
                   Register as a partner
                 </Link>
-              </div>
-            </div>
-
-            {/* Right — stats + extra paragraphs */}
-            <div className="space-y-6">
-              {/* Stats 2×2 grid */}
-              <div className="grid grid-cols-2 gap-px rounded-2xl overflow-hidden border border-slate-100 bg-slate-100 shadow-[0_2px_10px_rgba(15,23,42,0.05)]">
-                {STATS.map((stat) => (
-                  <div key={stat.label} className="flex flex-col items-center justify-center bg-white py-8 px-4 text-center">
-                    <span className="text-4xl font-black tracking-tight text-slate-950">{stat.value}</span>
-                    <h6 className="mt-1.5 text-[11px] font-bold uppercase tracking-[0.22em] text-slate-400">{stat.label}</h6>
-                  </div>
-                ))}
-              </div>
-
-              {/* Supporting text */}
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 p-6 space-y-4 text-[14px] leading-7 text-slate-500">
-                <p>
-                  Unlike general-purpose marketplaces, NxSys Digital is built specifically for B2B workflows —
-                  supporting RFQ submissions, volume pricing negotiations, phased delivery scheduling, and
-                  after-sales escalation through a single named contact.
-                </p>
-                <p>
-                  Registered partners gain real-time inventory visibility, priority fulfilment queues, and early
-                  access to new product lines. Whether you're deploying 10 workstations or 1,000, our process
-                  scales without compromising authenticity or service quality.
-                </p>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Building2, FileSignature, ShoppingCart, FileCheck2, Truck, LifeBuoy,
-  ArrowRight, CheckCircle2, Plus, Minus,
+  ArrowRight, Briefcase, ClipboardList, MapPin, ScrollText, Plus, Minus,
 } from 'lucide-react';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 
@@ -65,10 +65,26 @@ const STEPS = [
 ];
 
 const BEFORE_YOU_START = [
-  'Keep your company name, GSTIN and billing details ready.',
-  'List the products, specifications and quantities you require.',
-  'Share your delivery location and any project timelines.',
-  'Review our Terms & Conditions before confirming an order.',
+  {
+    icon: Briefcase,
+    title: 'Company Details',
+    description: 'Keep your company name, GSTIN and billing details ready.',
+  },
+  {
+    icon: ClipboardList,
+    title: 'Product Requirements',
+    description: 'List the products, specifications and quantities you require.',
+  },
+  {
+    icon: MapPin,
+    title: 'Delivery Information',
+    description: 'Share your delivery location and any project timelines.',
+  },
+  {
+    icon: ScrollText,
+    title: 'Terms & Conditions',
+    description: 'Review our Terms & Conditions before confirming an order.',
+  },
 ];
 
 const FAQS = [
@@ -98,22 +114,34 @@ const FAQS = [
   },
 ];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ number, q, a }: { number: number; q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+    <div
+      className={`group rounded-2xl border bg-white transition-all duration-200 ${open ? 'border-primary/30 shadow-[0_8px_24px_rgba(15,23,42,0.08)]' : 'border-slate-200 hover:border-slate-300'
+        }`}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        aria-expanded={open}
+        className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6"
       >
-        <span className="font-black text-slate-900 text-[15px]">{q}</span>
+        <span
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition-colors ${open ? 'bg-primary text-textMain' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
+            }`}
+        >
+          {String(number).padStart(2, '0')}
+        </span>
+        <span className="flex-1 font-black text-slate-900 text-[15px]">{q}</span>
         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
           {open ? <Minus size={15} strokeWidth={2.5} /> : <Plus size={15} strokeWidth={2.5} />}
         </span>
       </button>
       {open && (
-        <div className="px-6 pb-5 text-[14px] leading-relaxed text-slate-500">{a}</div>
+        <div className="px-5 pb-5 pl-[68px] text-[14px] leading-relaxed text-slate-500 sm:px-6 sm:pl-[72px]">
+          {a}
+        </div>
       )}
     </div>
   );
@@ -194,20 +222,26 @@ function HowToBuy() {
 
       {/* Before you start */}
       <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-800">
-        <div className="container-shell max-w-3xl mx-auto">
-          <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4 text-center">Before You Start</p>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-10 text-center">
-            What you'll need
-          </h2>
-          <ul className="space-y-4 max-w-xl mx-auto mb-10">
-            {BEFORE_YOU_START.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[14px] text-slate-300">
-                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-primary" strokeWidth={2.5} />
-                {item}
-              </li>
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-14">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">Before You Start</p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-5">What you'll need</h2>
+            <p className="text-base leading-relaxed text-slate-400">
+              Have these details ready so our team can move quickly from enquiry to quotation.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {BEFORE_YOU_START.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Icon size={20} strokeWidth={2} />
+                </div>
+                <h3 className="font-black text-white mb-2 text-[15px]">{title}</h3>
+                <p className="text-[13px] leading-relaxed text-slate-400 flex-1">{description}</p>
+              </div>
             ))}
-          </ul>
-          <p className="text-center text-[13px] text-slate-400">
+          </div>
+          <p className="text-center text-[13px] text-slate-400 mt-10">
             Read our{' '}
             <Link to="/terms-conditions" className="font-semibold text-primary hover:underline">
               Terms &amp; Conditions
@@ -219,17 +253,36 @@ function HowToBuy() {
 
       {/* FAQ */}
       <section className="bg-white py-20 sm:py-24 border-b border-slate-100">
-        <div className="container-shell max-w-3xl mx-auto">
-          <div className="text-center mb-14">
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-14">
             <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">FAQ</p>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-5">
               Frequently asked questions
             </h2>
+            <p className="text-base leading-relaxed text-slate-500">
+              Common questions about ordering, pricing and delivery from first-time NxSys Digital buyers.
+            </p>
           </div>
-          <div className="space-y-4">
-            {FAQS.map((faq) => (
-              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
-            ))}
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-14">
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <p className="font-black text-slate-900 text-[14px] mb-1">Still have questions?</p>
+                <p className="text-[13px] leading-relaxed text-slate-500 mb-4">
+                  Our team can walk you through pricing, availability and procurement support.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-5 py-2.5 rounded-full text-[13px] hover:bg-primary/90 transition-colors"
+                >
+                  Contact Our Team
+                </Link>
+              </div>
+            </div>
+            <div className="space-y-4">
+              {FAQS.map((faq, index) => (
+                <FaqItem key={faq.q} number={index + 1} q={faq.q} a={faq.a} />
+              ))}
+            </div>
           </div>
         </div>
       </section>

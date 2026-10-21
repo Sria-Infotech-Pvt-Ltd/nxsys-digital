@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
 import warehouseBarcodeImage from '../../assets/content/warehouse-barcode-scan.jpg';
+import warehouseTeamImage from '../../assets/content/warehouse-team-review.jpg';
 
 const INTRO_PARAGRAPHS = [
   'NxSys Digital is an IT hardware distributor in Hyderabad, supporting businesses with technology products and B2B procurement solutions. Based in the Kondapur business area, Hyderabad, Telangana, we help organisations source IT hardware for their daily operations, workplace infrastructure, and technology requirements.',
@@ -73,21 +74,35 @@ const FAQS = [
   { q: 'Does NxSys Digital supply monitors and projectors for corporate use?', a: 'NxSys Digital offers access to monitor and projector options for workstations, meeting rooms, corporate presentations, and training environments, subject to product availability.' },
 ];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ number, q, a }: { number: number; q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+    <div
+      className={`group rounded-2xl border bg-white transition-all duration-200 ${open ? 'border-primary/30 shadow-[0_8px_24px_rgba(15,23,42,0.08)]' : 'border-slate-200 hover:border-slate-300'
+        }`}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        aria-expanded={open}
+        className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-6"
       >
-        <span className="font-black text-slate-900 text-[15px]">{q}</span>
+        <span
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-black transition-colors ${open ? 'bg-primary text-textMain' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
+            }`}
+        >
+          {String(number).padStart(2, '0')}
+        </span>
+        <span className="flex-1 font-black text-slate-900 text-[15px]">{q}</span>
         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
           {open ? <Minus size={15} strokeWidth={2.5} /> : <Plus size={15} strokeWidth={2.5} />}
         </span>
       </button>
-      {open && <div className="px-6 pb-5 text-[14px] leading-relaxed text-slate-500">{a}</div>}
+      {open && (
+        <div className="px-5 pb-5 pl-[68px] text-[14px] leading-relaxed text-slate-500 sm:px-6 sm:pl-[72px]">
+          {a}
+        </div>
+      )}
     </div>
   );
 }
@@ -103,26 +118,42 @@ function AboutUs() {
     <main className="bg-greyLight">
       {/* Hero / intro */}
       <section className="bg-white py-16 sm:py-20 border-b border-slate-100">
-        <div className="container-shell max-w-3xl mx-auto text-center">
-          <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">Company</p>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-6 leading-tight">
-            About NxSys Digital – IT Hardware Distributor in Hyderabad
-          </h1>
-          {INTRO_PARAGRAPHS.map((text, i) => (
-            <p
-              key={text.slice(0, 20)}
-              className={`text-base leading-8 text-slate-600 ${i === INTRO_PARAGRAPHS.length - 1 ? 'mb-8' : 'mb-4'}`}
-            >
-              {text}
-            </p>
-          ))}
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/products" className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors">
-              Browse Products
-            </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors">
-              Request an RFQ
-            </Link>
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-12">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">Company</p>
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 leading-tight">
+              About NxSys Digital – IT Hardware Distributor in Hyderabad
+            </h1>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-center lg:gap-14">
+            <div className="hidden lg:block overflow-hidden rounded-2xl border border-slate-200 aspect-[3/4]">
+              <img
+                src={warehouseTeamImage}
+                alt="NxSys Digital team reviewing stock and orders"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div>
+              {INTRO_PARAGRAPHS.map((text, i) => (
+                <p
+                  key={text.slice(0, 20)}
+                  className={`text-base leading-8 text-slate-600 ${i === INTRO_PARAGRAPHS.length - 1 ? 'mb-8' : 'mb-4'}`}
+                >
+                  {text}
+                </p>
+              ))}
+              <div className="flex flex-wrap gap-3">
+                <Link to="/products" className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors">
+                  Browse Products
+                </Link>
+                <Link to="/contact" className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors">
+                  Request an RFQ
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -161,24 +192,22 @@ function AboutUs() {
 
       {/* Our B2B Business Model */}
       <section className="bg-white py-20 sm:py-24 border-b border-slate-100">
-        <div className="container-shell grid gap-12 lg:grid-cols-2 items-start">
-          <div>
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-14">
             <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">Our B2B Model</p>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-5 leading-tight">
               A B2B model designed around business requirements
             </h2>
-            <p className="text-base leading-8 text-slate-500 mb-4">
+            <p className="text-base leading-relaxed text-slate-500">
               NxSys Digital follows a B2B-focused model designed around business purchasing requirements. We help
               organisations explore hardware options and coordinate procurement enquiries according to their needs.
-            </p>
-            <p className="text-base leading-8 text-slate-500">
               Through this model, we aim to make IT hardware sourcing more organised and accessible for business
               buyers.
             </p>
           </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-8">
-            <h3 className="font-black text-slate-900 text-[15px] mb-5">Our Business Model Supports</h3>
-            <ul className="space-y-4">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 max-w-3xl mx-auto">
+            <h3 className="font-black text-slate-900 text-[15px] mb-5 text-center">Our Business Model Supports</h3>
+            <ul className="grid gap-5 sm:grid-cols-2">
               {BUSINESS_MODEL_ITEMS.map((item) => (
                 <li key={item.title}>
                   <p className="text-[14px] font-bold text-slate-800">{item.title}</p>
@@ -193,6 +222,12 @@ function AboutUs() {
       {/* Operations snapshot */}
       <section className="bg-slate-50 py-16 sm:py-20 border-b border-slate-100">
         <div className="container-shell max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">Behind the Scenes</p>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-950">
+              Coordinating every order, from stock to dispatch
+            </h2>
+          </div>
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
             <img
               src={warehouseBarcodeImage}
@@ -349,17 +384,37 @@ function AboutUs() {
 
       {/* FAQ */}
       <section className="bg-white py-20 sm:py-24 border-b border-slate-100">
-        <div className="container-shell max-w-3xl mx-auto">
-          <div className="text-center mb-14">
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-14">
             <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">FAQ</p>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 mb-5">
-              Frequently asked questions about NxSys Digital
+              Frequently asked questions
             </h2>
+            <p className="text-base leading-relaxed text-slate-500">
+              Common questions from procurement managers, IT buyers, and teams working with NxSys Digital for the
+              first time.
+            </p>
           </div>
-          <div className="space-y-4">
-            {FAQS.map((faq) => (
-              <FaqItem key={faq.q} q={faq.q} a={faq.a} />
-            ))}
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-14">
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <p className="font-black text-slate-900 text-[14px] mb-1">Still have questions?</p>
+                <p className="text-[13px] leading-relaxed text-slate-500 mb-4">
+                  Our team can walk you through pricing, availability and procurement support.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-5 py-2.5 rounded-full text-[13px] hover:bg-primary/90 transition-colors"
+                >
+                  Contact Our Team
+                </Link>
+              </div>
+            </div>
+            <div className="space-y-4">
+              {FAQS.map((faq, index) => (
+                <FaqItem key={faq.q} number={index + 1} q={faq.q} a={faq.a} />
+              ))}
+            </div>
           </div>
         </div>
       </section>

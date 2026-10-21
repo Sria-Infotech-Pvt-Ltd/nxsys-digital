@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import placeholder from '../../assets/placeholder.jpg';
 import warehouseTeamImage from '../../assets/content/warehouse-team-review.jpg';
 import salesQuoteImage from '../../assets/content/sales-quote-discussion.jpg';
+import warehouseBarcodeImage from '../../assets/content/warehouse-barcode-scan.jpg';
 import { getBrandName, getCategoryName } from '@/services';
 import { useProducts } from '@/hooks/useProducts';
 import { useDocumentHead } from '@/hooks/useDocumentHead';
@@ -156,47 +157,60 @@ function Home() {
 
   return (
     <main className="bg-greyLight">
-      <PromoOffers />
+      {/* <PromoOffers /> */}
 
       <HeroBanner slides={heroSlides} pageHeading="B2B IT Hardware Distributor in India" />
 
       <section className="bg-white py-14 sm:py-16 border-b border-slate-100">
-        <div className="container-shell max-w-3xl mx-auto text-center">
-          <p className="text-base leading-8 text-slate-600 mb-4">
-            NxSys Digital is a sister concern of{' '}
-            <a href="https://www.sriainfotech.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Sria Group</a>
-            . NxSys Digital is a B2B IT hardware distributor in India, helping businesses and institutions source
-            laptops, desktops, monitors, projectors, printers, networking equipment and other IT products.
-          </p>
-          <p className="text-base leading-8 text-slate-600 mb-4">
-            We work with businesses, IT resellers, system integrators, educational institutions and corporate
-            buyers. Through our B2B procurement model, customers can source genuine products from authorised
-            distribution channels with support for pricing, availability and delivery.
-          </p>
-          <p className="text-base leading-8 text-slate-600 mb-8">
-            Whether you need a few systems for a new office or hardware for a larger project, our team can help you
-            find the right products for your requirement.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
-            >
-              Browse Products
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors"
-            >
-              Request an RFQ
-            </Link>
+        <div className="container-shell">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-center lg:gap-14">
+            <div className="hidden lg:block overflow-hidden rounded-2xl border border-slate-200 aspect-[3/4]">
+              <img
+                src={warehouseBarcodeImage}
+                alt="NxSys Digital team coordinating stock and dispatch"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div>
+              <p className="text-base leading-8 text-slate-600 mb-4">
+                NxSys Digital is a sister concern of{' '}
+                <a href="https://www.sriainfotech.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Sria Group</a>
+                . NxSys Digital is a B2B IT hardware distributor in India, helping businesses and institutions source
+                laptops, desktops, monitors, projectors, printers, networking equipment and other IT products.
+              </p>
+              <p className="text-base leading-8 text-slate-600 mb-4">
+                We work with businesses, IT resellers, system integrators, educational institutions and corporate
+                buyers. Through our B2B procurement model, customers can source genuine products from authorised
+                distribution channels with support for pricing, availability and delivery.
+              </p>
+              <p className="text-base leading-8 text-slate-600 mb-8">
+                Whether you need a few systems for a new office or hardware for a larger project, our team can help you
+                find the right products for your requirement.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
+                >
+                  Browse Products
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 border-2 border-slate-200 text-slate-700 font-bold px-6 py-3 rounded-full text-sm hover:border-primary hover:text-primary transition-colors"
+                >
+                  Request an RFQ
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-800">
-        <div className="container-shell grid gap-10 lg:grid-cols-2 items-center">
-          <div className="order-2 lg:order-1">
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-10">
             <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
               Procurement, Backed by People
             </p>
@@ -215,11 +229,11 @@ function Home() {
               Talk to Our Team
             </Link>
           </div>
-          <div className="order-1 lg:order-2 overflow-hidden rounded-2xl border border-white/10">
+          <div className="max-w-3xl mx-auto overflow-hidden rounded-2xl border border-white/10">
             <img
               src={warehouseTeamImage}
               alt="NxSys Digital procurement team reviewing stock and orders"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover max-h-[380px]"
               loading="lazy"
             />
           </div>
@@ -241,32 +255,37 @@ function Home() {
       <WhyChooseUs />
 
       <section className="bg-slate-950 py-20 sm:py-24 border-b border-slate-800">
-        <div className="container-shell grid gap-10 lg:grid-cols-2 items-center">
-          <div className="overflow-hidden rounded-2xl border border-white/10">
-            <img
-              src={salesQuoteImage}
-              alt="NxSys Digital sales team discussing pricing and availability with a customer"
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div>
+        <div className="container-shell">
+          <div className="mx-auto max-w-2xl text-center mb-12">
             <p className="text-[11px] font-black uppercase tracking-[0.4em] text-primary mb-4">
               Quick, Clear Conversations
             </p>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
               Real conversations, real quotations
             </h2>
-            <p className="text-base leading-8 text-slate-400 mb-6">
-              Share your requirement and our sales team will walk you through suitable products, pricing and
-              availability, so you can make a confident purchasing decision without back-and-forth delays.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
-            >
-              Request a Quote
-            </Link>
+          </div>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+            <div className="overflow-hidden rounded-2xl border border-white/10 order-2 lg:order-1">
+              <img
+                src={salesQuoteImage}
+                alt="NxSys Digital sales team discussing pricing and availability with a customer"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <p className="text-base leading-8 text-slate-400 mb-6">
+                Share your requirement and our sales team will walk you through suitable products, pricing and
+                availability, so you can make a confident purchasing decision without back-and-forth delays. No
+                account needed to browse — just request pricing when you're ready.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-primary text-textMain font-bold px-6 py-3 rounded-full text-sm hover:bg-primary/90 transition-colors"
+              >
+                Request a Quote
+              </Link>
+            </div>
           </div>
         </div>
       </section>
