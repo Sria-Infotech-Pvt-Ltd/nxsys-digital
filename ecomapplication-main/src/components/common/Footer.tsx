@@ -13,6 +13,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { slugify } from '../../utils/helpers';
 
 const contactChannels = [
@@ -47,6 +48,8 @@ const socialLinks = [
 
 function Footer() {
   const { categories = [] } = useProducts() ?? {};
+  const { posts: blogPosts } = useBlogPosts();
+  const hasBlogPosts = blogPosts.length > 0;
   const footerCategories = useMemo(() => {
     const uniqueMap = new Map();
     categories.forEach(cat => {
@@ -237,6 +240,7 @@ function Footer() {
             <Link to="/products" className="transition-colors hover:text-primary">Catalog</Link>
             <Link to="/about" className="transition-colors hover:text-primary">About Us</Link>
             <Link to="/how-to-buy" className="transition-colors hover:text-primary">How to Buy</Link>
+            {hasBlogPosts && <Link to="/blog" className="transition-colors hover:text-primary">Blog</Link>}
             <Link to="/contact" className="transition-colors hover:text-primary">Contact</Link>
             <Link to="/terms-conditions" className="transition-colors hover:text-primary">Terms</Link>
             <Link to="/privacy-policy" className="transition-colors hover:text-primary">Privacy</Link>

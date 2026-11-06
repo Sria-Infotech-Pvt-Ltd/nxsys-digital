@@ -28,6 +28,7 @@ const ResetPassword = lazy(() => import('@/pages/auth/ResetPassword'));
 
 // Admin Pages
 const AdminCategoriesPage = lazy(() => import('@/pages/admin/AdminCategoriesPage'));
+const AdminBlogsPage = lazy(() => import('@/pages/admin/AdminBlogsPage'));
 const AdminDashboardPage = lazy(() => import('@/pages/admin/AdminDashboardPage'));
 const AdminInventoryPage = lazy(() => import('@/pages/admin/AdminInventoryPage'));
 const AdminLoginPage = lazy(() => import('@/pages/admin/AdminLoginPage'));
@@ -39,6 +40,8 @@ const AdminReviewsPage = lazy(() => import('@/pages/admin/AdminReviewsPage'));
 const Home = lazy(() => import('@/pages/store/Home'));
 const AboutUs = lazy(() => import('@/pages/store/AboutUs'));
 const HowToBuy = lazy(() => import('@/pages/store/HowToBuy'));
+const Blog = lazy(() => import('@/pages/store/Blog'));
+const BlogPost = lazy(() => import('@/pages/store/BlogPost'));
 const Products = lazy(() => import('@/pages/store/Products'));
 const ProductDetails = lazy(() => import('@/pages/store/ProductDetails'));
 const NotFound = lazy(() => import('@/pages/store/NotFound'));
@@ -112,6 +115,7 @@ function App() {
               <Route path="products" element={<AdminProductsPage />} />
               <Route path="inventory" element={<AdminInventoryPage />} />
               <Route path="categories" element={<AdminCategoriesPage />} />
+              <Route path="blogs" element={<AdminBlogsPage />} />
               <Route path="rfq" element={<AdminRFQPage />} />
               <Route path="reviews" element={<AdminReviewsPage />} />
             </Route>
@@ -123,6 +127,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<AboutUs />} />
             <Route path="how-to-buy" element={<HowToBuy />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="products" element={<Products />} />
             <Route path="products/:category" element={<Products />} />
             <Route path="products/:category/:subcategory" element={<Products />} />

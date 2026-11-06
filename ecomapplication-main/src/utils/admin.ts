@@ -1,10 +1,11 @@
-import { Boxes, FolderTree, LayoutDashboard, Package, ReceiptText, MessageSquare } from 'lucide-react';
+import { Boxes, FolderTree, LayoutDashboard, Package, ReceiptText, MessageSquare, Newspaper } from 'lucide-react';
 
 export const adminNavItems = [
   { label: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
   { label: 'Products', path: '/admin/products', icon: Boxes },
   { label: 'Inventory', path: '/admin/inventory', icon: Package },
   { label: 'Categories', path: '/admin/categories', icon: FolderTree },
+  { label: 'Blogs', path: '/admin/blogs', icon: Newspaper },
   { label: 'Price Requests', path: '/admin/rfq', icon: ReceiptText },
   { label: 'Reviews', path: '/admin/reviews', icon: MessageSquare },
 ];

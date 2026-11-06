@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import { useCatalog } from '@/hooks/useCatalog';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
 import type { Category } from '@/types';
 import { NAVBAR_GROUPS } from '../../utils/constants';
 import { slugify } from '../../utils/helpers';
@@ -100,6 +101,8 @@ const normalizeNestedItems = (category: any, items: any[] = []) =>
 
 function CategoryNav() {
   const { categoryTree = [], brands = [] } = useCatalog() ?? {};
+  const { posts: blogPosts } = useBlogPosts();
+  const hasBlogPosts = blogPosts.length > 0;
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [expandedMobileGroup, setExpandedMobileGroup] = useState<string | null>(null);
@@ -353,6 +356,14 @@ function CategoryNav() {
               >
                 How to Buy
               </NavLink>
+              {hasBlogPosts && (
+                <NavLink
+                  to="/blog"
+                  className="flex h-full shrink-0 items-center px-3 md:px-6 text-[12px] md:text-[14px] font-medium uppercase tracking-[0.12em] text-white whitespace-nowrap transition-all hover:bg-black/10"
+                >
+                  Blog
+                </NavLink>
+              )}
             </div>
           </div>
         </div>
@@ -415,6 +426,15 @@ function CategoryNav() {
               >
                 How to Buy
               </NavLink>
+              {hasBlogPosts && (
+                <NavLink
+                  to="/blog"
+                  onClick={closeSidebar}
+                  className={({ isActive }) => `block rounded-2xl border border-slate-100 px-4 py-3.5 text-left text-[13px] font-bold uppercase tracking-wider transition-colors ${isActive ? 'bg-primary/5 text-primary' : 'bg-white text-textMain hover:bg-slate-50'}`}
+                >
+                  Blog
+                </NavLink>
+              )}
               {menuItems.map((item) => {
                 const isOpen = expandedMobileGroup === item.name;
                 const sections = item.sections;

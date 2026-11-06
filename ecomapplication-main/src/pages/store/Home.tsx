@@ -14,6 +14,7 @@ import CategoryCarousel, { type CarouselVariant } from '@/components/home/Catego
 import CategoryBrandStrip from '@/components/home/CategoryBrandStrip';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import SEOAboutSection from '@/components/home/SEOAboutSection';
+import BlogPreviewSection from '@/components/home/BlogPreviewSection';
 
 import { categoryBrandStrip as showcaseCategoryBrandStrip, heroSlides } from '@/utils';
 
@@ -291,6 +292,7 @@ function Home() {
       </section>
 
       <SEOAboutSection />
+      <BlogPreviewSection />
     </main>
   );
 }

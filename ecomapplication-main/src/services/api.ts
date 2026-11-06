@@ -817,6 +817,89 @@ export const brandApi = {
   deleteBrand: (id: any) => api.delete(joinPath('products', 'brands', id)).then(unwrapResponse),
 };
 
+// ---------------------------------------------------------------------------
+// BLOG POST PAYLOAD BUILDER (mirrors buildProductPayload)
+// ---------------------------------------------------------------------------
+const buildBlogPostPayload = (payload: any) => {
+  const { images, ...rest } = payload ?? {};
+  const out: any = { ...rest };
+
+  if (!Array.isArray(images) || images.length === 0) return out;
+
+  const newFileEntries = images.filter(
+    (img: any) => img && img.image instanceof File
+  );
+  if (newFileEntries.length === 0) return out;
+
+  out.uploaded_images = newFileEntries.map((img: any) => img.image as File);
+
+  const userMarkedMain = newFileEntries.find((img: any) => img.is_main === true);
+  if (userMarkedMain) {
+    out.featured_image = userMarkedMain.image as File;
+  }
+
+  return out;
+};
+
+export const normalizeBlogPost = (post: any) => {
+  if (!post) return null;
+  const sourceList: any[] = [];
+  if (Array.isArray(post.images)) sourceList.push(...post.images);
+  if (post.featured_image) sourceList.push(post.featured_image);
+
+  const seenUrls = new Set<string>();
+  const normalizedImages = sourceList
+    .map((img: any) => {
+      const url = typeof img === 'string' ? img : (img?.image_url || img?.image || img?.url);
+      const resolved = resolveAssetUrl(url);
+      if (!resolved || seenUrls.has(resolved)) return null;
+      seenUrls.add(resolved);
+      return typeof img === 'object' && img !== null
+        ? { ...img, image: resolved, url: resolved, image_url: resolved }
+        : { image: resolved, url: resolved, image_url: resolved };
+    })
+    .filter(Boolean);
+
+  const primaryImage = normalizedImages[0] as any;
+
+  return {
+    ...post,
+    id: post.id ?? post.pk,
+    title: post.title || 'Untitled post',
+    image: primaryImage?.url || resolveAssetUrl(post.featured_image) || null,
+    images: normalizedImages,
+  };
+};
+
+export const normalizeBlogPosts = (payload: any) => extractList(payload).map(normalizeBlogPost).filter(Boolean);
+
+export const blogApi = {
+  getPosts: (params: any = {}) => publicApi.get('/blog/posts/', { params }).then(unwrapResponse),
+  getPostBySlug: (slug: string) => publicApi.get(`/blog/posts/slug/${slug}/`).then(unwrapResponse),
+  getPostById: (id: any) => api.get(joinPath('blog', 'posts', id)).then(unwrapResponse),
+  createPost: (payload: any) => {
+    const built = buildBlogPostPayload(payload);
+    return api.post('/blog/posts/', toFormData(built), {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(unwrapResponse);
+  },
+  updatePost: (id: any, payload: any) => {
+    const built = buildBlogPostPayload(payload);
+    return api.put(joinPath('blog', 'posts', id), toFormData(built), {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(unwrapResponse);
+  },
+  patchPost: (id: any, payload: any) => {
+    const built = buildBlogPostPayload(payload);
+    return api.patch(joinPath('blog', 'posts', id), toFormData(built), {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }).then(unwrapResponse);
+  },
+  deletePost: (id: any) => api.delete(joinPath('blog', 'posts', id)).then(unwrapResponse),
+  deletePostImage: (postId: any, imageId: any) =>
+    api.delete(joinPath('blog', 'posts', postId, 'images', imageId)).then(unwrapResponse),
+};
+
 export const searchApi = {
   searchProducts: (params: any, cat: any = {}) => publicApi.get('/products/products/search/', { params: cleanSearchParams(params) }).then(res => normalizeProducts(res, cat)),
   getSearchFacets: (params: any) => publicApi.get('/products/products/facets/', { params: cleanSearchParams(params) }).then(unwrapResponse),
@@ -922,6 +1005,14 @@ export const createBrand = brandApi.createBrand.bind(brandApi);
 export const updateBrand = brandApi.updateBrand.bind(brandApi);
 export const deleteBrand = brandApi.deleteBrand.bind(brandApi);
 export const getDashboardData = analyticsApi.getDashboard.bind(analyticsApi);
+export const getBlogPosts = blogApi.getPosts.bind(blogApi);
+export const getBlogPostBySlug = blogApi.getPostBySlug.bind(blogApi);
+export const getBlogPostById = blogApi.getPostById.bind(blogApi);
+export const createBlogPost = blogApi.createPost.bind(blogApi);
+export const updateBlogPost = blogApi.updatePost.bind(blogApi);
+export const patchBlogPost = blogApi.patchPost.bind(blogApi);
+export const deleteBlogPost = blogApi.deletePost.bind(blogApi);
+export const deleteBlogPostImage = blogApi.deletePostImage.bind(blogApi);
 
 export default {
   auth: authApi,
@@ -937,4 +1028,5 @@ export default {
   rfqIntent: rfqIntentService,
   review: reviewApi,
   analytics: analyticsApi,
+  blog: blogApi,
 };
