@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
-import thinkBookOffer from '../../assets/offers/Dussehra ThinkBook Business Power.png';
-import qvs1260Offer from '../../assets/offers/Dell Pro Slim QVS1260 Business Desktop.png';
+import thinkBookOffer from '../../assets/offers/thinkbook-diwali-offer.jpg';
+import dellDiwaliOffer from '../../assets/offers/dell-qvs1260-diwali-offer-v2.jpg';
 
 type Offer = {
   id: string;
@@ -10,14 +10,14 @@ type Offer = {
 
 const OFFERS: Offer[] = [
   {
-    id: 'thinkbook-14-g8-ial',
+    id: 'thinkbook-14-g8-ial-diwali',
     image: thinkBookOffer,
-    alt: 'Dussehra Special Offer - Lenovo ThinkBook 14 G8 IAL',
+    alt: 'Diwali Special Offer - Lenovo ThinkBook 14 G8 IAL',
   },
   {
-    id: 'qvs1260-pro-slim',
-    image: qvs1260Offer,
-    alt: 'Dell Pro Slim QVS1260 Business Desktop',
+    id: 'dell-qvs1260-diwali',
+    image: dellDiwaliOffer,
+    alt: 'Diwali Special Offer - Dell Pro Slim QVS1260',
   },
 ];
 
@@ -36,7 +36,7 @@ function PromoOffers() {
 
   return (
     <section className="relative w-full overflow-hidden bg-white">
-      <div className="relative w-full aspect-[3.5/1] min-h-[120px] sm:min-h-[190px]">
+      <div className="relative w-full aspect-[3.2/1]">
         {OFFERS.map((offer, index) => (
           <div
             key={offer.id}
