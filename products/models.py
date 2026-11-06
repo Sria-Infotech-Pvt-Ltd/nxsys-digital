@@ -1,0 +1,178 @@
+from django.contrib.postgres.indexes import GinIndex
+from django.db import models
+from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="subcategories",
+    )
+    navbar_group = models.CharField(max_length=100, null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name", "parent"],
+                name="uniq_category_name_parent",
+            )
+        ]
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class Brand(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    logo = models.ImageField(upload_to="brands/", null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    brand = models.ForeignKey(
+        Brand, on_delete=models.PROTECT, related_name="products",
+        null=True, blank=True,
+    )
+    category = models.ForeignKey(
+        Category, on_delete=models.PROTECT, related_name="products",
+    )
+    subcategory = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="subcategory_products",
+    )
+    name = models.CharField(max_length=255, db_index=True)
+    mpn = models.CharField(max_length=100, null=True, blank=True)
+    sku = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField()
+    product_image = models.ImageField(upload_to="products/", null=True, blank=True)
+    highlights = models.TextField(null=True, blank=True)
+    rating = models.FloatField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+    )
+    featured = models.BooleanField(default=False)
+    top_selling = models.BooleanField(default=False)
+    new_arrival = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    related_products = models.ManyToManyField(
+        "self",
+        blank=True,
+        symmetrical=False,
+        related_name="accessory_for",
+        help_text="Products that are accessories for this item (e.g. Bag, Mouse for a Laptop)."
+    )
+    frequently_bought_together = models.ManyToManyField(
+        "self",
+        blank=True,
+        symmetrical=False,
+        related_name="bought_with",
+        help_text="Products that are frequently bought together with this item."
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["is_active", "category"]),
+            models.Index(fields=["is_active", "subcategory"]),
+            models.Index(fields=["is_active", "featured"]),
+            models.Index(fields=["is_active", "top_selling"]),
+            models.Index(fields=["is_active", "new_arrival"]),
+            models.Index(fields=["is_active", "created_at"]),
+            # Trigram GIN indexes make the case-insensitive ILIKE '%term%'
+            # DB-fallback search fast (a plain B-tree can't serve substring
+            # matches). Mirrors the Elasticsearch primary search path.
+            GinIndex(
+                fields=["name"],
+                name="product_name_trgm_idx",
+                opclasses=["gin_trgm_ops"],
+            ),
+            GinIndex(
+                fields=["description"],
+                name="product_desc_trgm_idx",
+                opclasses=["gin_trgm_ops"],
+            ),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["sku"],
+                condition=models.Q(sku__isnull=False),
+                name="products_product_sku_unique_nonnull"
+            ),
+        ]
+
+    def __str__(self):
+        return self.name
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="images",
+    )
+    image = models.ImageField(upload_to="products/")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.product.name} Image"
+
+
+class ProductSpecification(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="specifications",
+    )
+    section = models.CharField(max_length=100, default="General")
+    key = models.CharField(max_length=100)
+    value = models.CharField(max_length=255)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "section", "key"],
+                name="uniq_product_spec_section_key",
+            )
+        ]
+        ordering = ["section", "key"]
+
+    def __str__(self):
+        return f"{self.product.name} - {self.section} - {self.key}"
+
+
+class RecentlyViewedProduct(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name="recently_viewed"
+    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-viewed_at"]
+        unique_together = ["user", "product"]
+
+    def __str__(self):
+        return f"User {self.user_id} viewed {self.product.name}"

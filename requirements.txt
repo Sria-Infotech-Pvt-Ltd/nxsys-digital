@@ -1,0 +1,70 @@
+# Core
+Django>=5.0,<5.2
+djangorestframework>=3.15
+djangorestframework-simplejwt>=5.3
+django-cors-headers>=4.3
+django-filter>=24.1
+django-extensions>=3.2
+django-redis>=5.4
+dj-database-url>=2.2
+python-decouple>=3.8
+python-dotenv>=1.0
+python-slugify>=8.0
+
+# Auth / security
+PyJWT>=2.8
+cryptography>=42.0
+
+# DB / cache
+psycopg2-binary>=2.9
+redis>=5.0
+
+# Background work
+celery>=5.3
+django-celery-beat>=2.6
+django-celery-results>=2.5
+django-celery-email>=3.0
+amqp>=5.2
+billiard>=4.2
+kombu>=5.3
+vine>=5.1
+
+# Storage / media
+imagekitio>=5.7
+pillow>=10.2
+django-colorfield>=0.11
+django-admin-interface>=0.28
+django-appconf>=1.0
+bleach>=6.1
+
+# Search (optional)
+django-elasticsearch-dsl>=8.0
+elasticsearch>=8.13,<9.0
+elasticsearch-dsl>=8.13,<9.0
+
+# Payments
+razorpay>=1.4
+
+# Serving
+gunicorn>=22.0
+whitenoise>=6.6
+asgiref>=3.8
+sqlparse>=0.5
+
+# Reporting
+reportlab>=4.1
+openpyxl>=3.1
+pandas>=2.2
+numpy>=1.26
+
+# Misc utilities
+requests>=2.32
+urllib3>=2.2
+python-dateutil>=2.9
+pytz>=2024.1
+tzdata>=2024.1
+six>=1.16
+click>=8.1
+
+# Concurrent-safe rotating log handler (for multi-worker gunicorn)
+concurrent-log-handler>=0.9.25
