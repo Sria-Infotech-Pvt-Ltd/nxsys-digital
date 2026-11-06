@@ -151,6 +151,7 @@ INSTALLED_APPS.extend([
     "analytics",
     "search",
     "core",
+    "blog",
 ])
 
 
